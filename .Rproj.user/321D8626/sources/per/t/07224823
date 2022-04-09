@@ -1,0 +1,26 @@
+{
+    "id": "07224823",
+    "path": "~/Documents/r_projects/scriptSearch/R/app_server.R",
+    "project_path": "R/app_server.R",
+    "type": "r_source",
+    "hash": "1403104079",
+    "contents": "",
+    "dirty": false,
+    "created": 1649411481148.0,
+    "source_on_save": false,
+    "relative_order": 6,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "12,32",
+        "scrollLine": "0"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1649411613,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1649411613208,
+    "read_only": false,
+    "read_only_alternatives": []
+}

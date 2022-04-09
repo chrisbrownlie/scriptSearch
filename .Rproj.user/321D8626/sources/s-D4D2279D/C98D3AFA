@@ -1,0 +1,26 @@
+{
+    "id": "C98D3AFA",
+    "path": "~/Documents/r_projects/scriptSearch/R/mod_01_landing.R",
+    "project_path": "R/mod_01_landing.R",
+    "type": "r_source",
+    "hash": "1563913569",
+    "contents": "",
+    "dirty": false,
+    "created": 1649405828873.0,
+    "source_on_save": false,
+    "relative_order": 4,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "18,33",
+        "scrollLine": "12"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1649538931,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1649538931437,
+    "read_only": false,
+    "read_only_alternatives": []
+}
