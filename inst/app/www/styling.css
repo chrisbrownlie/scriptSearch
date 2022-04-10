@@ -32,7 +32,7 @@ p, li {
 
 /* Landing Page */
 .landing_page_container {
-  background-image: url(/img/bg_lp_1.jpg);
+  background-image: url(img/bg_lp_1.jpg);
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;

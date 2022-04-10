@@ -68,10 +68,13 @@ Script <- R6::R6Class(
     #' 
     #' @return a subset of the text_df dataframe with matching lines
     search = function(string) {
-      self$search_results <- self$text_df %>%
+      initial_results <- self$text_df %>%
         filter(grepl(pattern = string,
                      x = text,
-                     ignore.case = TRUE)) %>%
+                     ignore.case = TRUE))
+      if (nrow(initial_results)) {
+        
+      self$search_results <- initial_results %>%
         rowwise() %>%
         mutate(position = list(as.vector(gregexec(pattern = string,
                                   text = text,
@@ -87,6 +90,9 @@ Script <- R6::R6Class(
                                          position,
                                          31),
                end_in_excerpt = start_in_excerpt + nchar(string) -1)
+      } else {
+        self$search_results <- NULL
+      }
     }
   ),
   

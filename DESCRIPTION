@@ -20,4 +20,5 @@ Imports:
   cli,
   crayon,
   shinyalert,
-  tidyr
+  tidyr,
+  pkgload

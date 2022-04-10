@@ -1,5 +1,4 @@
-.Rproj*
 .Rhistory
 .Rprofile
 .Rbuildignore
-.Rproj.user
+.Rproj.user/

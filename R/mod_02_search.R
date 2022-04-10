@@ -72,7 +72,7 @@ search_server <- function(id,
         req(input$search_string)
         if (input$search_string=="") {
           h6("Try entering a search term on the left")
-        } else {
+        } else if (length(appData$script$search_results)) {
           lapply(
             seq_len(min(nrow(appData$script$search_results), 15)),
             function(i) {
@@ -92,6 +92,8 @@ search_server <- function(id,
               )
             }
           )
+        } else {
+          h3("No matches")
         }
       })
 
