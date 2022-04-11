@@ -77,12 +77,13 @@ search_server <- function(id,
       observe({
         req(input$search_string)
         appData$script$search(input$search_string)
-      })
+        appData$search_results <- appData$script$search_results
+      }, priority = 1)
       
       # Sidebar - aggregations
       output$aggregate_analysis <- renderUI({
         search <- input$search_string
-        p("Total number of matches: ", tags$strong(nrow(appData$script$search_results)))
+        p("Total number of matches: ", tags$strong(nrow(appData$search_results)))
       })
       
       # Main panel - search results
@@ -90,23 +91,23 @@ search_server <- function(id,
         req(!is.null(input$search_string))
         if (input$search_string=="") {
           h6("Try entering a search term on the left")
-        } else if (length(appData$script$search_results)) {
+        } else if (length(appData$search_results)) {
           lapply(
-            seq_len(min(nrow(appData$script$search_results), input$number_visible)),
+            seq_len(min(nrow(appData$search_results), input$number_visible)),
             function(i) {
               tags$div(
                 class = "search_result",
-                h3(substr(appData$script$search_results$excerpt[i],
+                h3(substr(appData$search_results$excerpt[i],
                           0,
-                          appData$script$search_results$start_in_excerpt[i]-1),
-                   tags$span(substr(appData$script$search_results$excerpt[i],
-                                       appData$script$search_results$start_in_excerpt[i],
-                                       appData$script$search_results$end_in_excerpt[i]),
+                          appData$search_results$start_in_excerpt[i]-1),
+                   tags$span(substr(appData$search_results$excerpt[i],
+                                    appData$search_results$start_in_excerpt[i],
+                                    appData$search_results$end_in_excerpt[i]),
                                class = "search_result_match",
                              .noWS = "outside"),
-                   substr(appData$script$search_results$excerpt[i],
-                          appData$script$search_results$end_in_excerpt[i]+1,
-                          nchar(appData$script$search_results$excerpt[i])))
+                   substr(appData$search_results$excerpt[i],
+                          appData$search_results$end_in_excerpt[i]+1,
+                          nchar(appData$search_results$excerpt[i])))
               )
             }
           )
