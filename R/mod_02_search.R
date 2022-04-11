@@ -13,15 +13,30 @@ search_ui <- function(id) {
 
   ns <- NS(id)
 
-  tags$div(class = "search_page_container",
+  shinyjs::hidden(
+    tags$div(class = "search_page_container",
            id = "search_view",
              sidebarLayout(
                sidebarPanel = sidebarPanel(
+                 width = 3,
                  textInput(ns("search_string"),
                            "Search for:",
-                           placeholder = "e.g. 'Look! there is a shepherd"),
+                           placeholder = "e.g. 'look', 'blood'"),
+                 p("To look for multiple words/spellings, use '|'. E.g. 'hello|hi'"),
                  hr(),
-                 uiOutput(ns("aggregate_analysis"))
+                 fluidRow(
+                   column(
+                     width = 4,
+                     numericInput(ns("number_visible"),
+                                  "No. of results to show:",
+                                  value = 15)
+                     ),
+                   column(
+                     width = 4,
+                     offset = 2,
+                     uiOutput(ns("aggregate_analysis"))
+                   )
+                   )
                ),
                
                mainPanel = mainPanel(
@@ -30,6 +45,7 @@ search_ui <- function(id) {
                )
              )
     ) #end search_page_container
+  )
 
 }
 
@@ -65,16 +81,18 @@ search_server <- function(id,
       
       # Sidebar - aggregations
       output$aggregate_analysis <- renderUI({
+        search <- input$search_string
+        p("Total number of matches: ", tags$strong(nrow(appData$script$search_results)))
       })
       
       # Main panel - search results
       output$search_results <- renderUI({
-        req(input$search_string)
+        req(!is.null(input$search_string))
         if (input$search_string=="") {
           h6("Try entering a search term on the left")
         } else if (length(appData$script$search_results)) {
           lapply(
-            seq_len(min(nrow(appData$script$search_results), 15)),
+            seq_len(min(nrow(appData$script$search_results), input$number_visible)),
             function(i) {
               tags$div(
                 class = "search_result",

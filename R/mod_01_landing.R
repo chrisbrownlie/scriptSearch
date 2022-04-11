@@ -67,16 +67,7 @@ landing_server <- function(id,
           appData[["script"]] <- Script$new(path = input$script_upload$datapath)
           
           # Hide landing page and show analysis page
-          shinyjs::hide(id = "landing_view",
-                        anim = TRUE,
-                        animType = "fade",
-                        time = 1,
-                        asis = TRUE)
-          shinyjs::show(id = "search_view",
-                        anim = TRUE,
-                        animType = "fade",
-                        time = 1,
-                        asis = TRUE)
+          appData$visible <- "search"
         }
       })
 

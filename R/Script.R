@@ -73,13 +73,16 @@ Script <- R6::R6Class(
                      x = text,
                      ignore.case = TRUE))
       if (nrow(initial_results)) {
-        
       self$search_results <- initial_results %>%
         rowwise() %>%
         mutate(position = list(as.vector(gregexec(pattern = string,
                                   text = text,
-                                  ignore.case = TRUE)[[1]]))) %>%
-        tidyr::unnest(position) %>%
+                                  ignore.case = TRUE)[[1]])),
+               match_length = list(as.vector(attr(gregexec(pattern = string,
+                                                 text = text,
+                                                 ignore.case = TRUE)[[1]],
+                                             "match.length")))) %>%
+        tidyr::unnest(all_of(c("position", "match_length"))) %>%
         rowwise() %>%
         mutate(excerpt_start = max(position-30, 1),
                excerpt_finish = position+30,
@@ -89,7 +92,7 @@ Script <- R6::R6Class(
                start_in_excerpt = ifelse(position-30<1,
                                          position,
                                          31),
-               end_in_excerpt = start_in_excerpt + nchar(string) -1)
+               end_in_excerpt = start_in_excerpt + match_length -1)
       } else {
         self$search_results <- NULL
       }

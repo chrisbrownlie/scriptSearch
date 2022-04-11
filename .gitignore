@@ -2,3 +2,7 @@
 .Rprofile
 .Rbuildignore
 .Rproj.user/
+.Rproj
+.Rproj/
+^.*\.Rproj*
+^\.Rproj\.user*
