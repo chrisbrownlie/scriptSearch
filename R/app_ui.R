@@ -3,6 +3,7 @@ app_ui <- function() {
   
   # UI definition
   ui <- fluidPage(
+    title = "scriptSearch|chrisbrownlie.com",
     tags$head(
       # Include custom CSS
       tags$link(href = "styling.css", rel = "stylesheet", type = "text/css"),
